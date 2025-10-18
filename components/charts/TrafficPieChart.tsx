@@ -26,9 +26,6 @@ export default function TrafficPieChart() {
         fetchTraffic();
     }, []);
 
-    if (traffic.length === 0)
-        return <p className="text-gray-500 text-center">Loading traffic data...</p>;
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +48,6 @@ export default function TrafficPieChart() {
                         outerRadius={100}
                         fill="#8884d8"
                         paddingAngle={3}
-                        // label
                         label={(entry: any) => {
                             const percent = entry?.percent as number; // cast to number
                             return `${Math.round(percent * 100)}%`;

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import LineChart from "@/components/charts/LineChart";
 import BarChart from "@/components/charts/BarChart";
@@ -12,6 +14,15 @@ const recentActivity = [
 ];
 
 export default function Reports() {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 1500)
+        return () => clearTimeout(timer);
+    }, [])
+
+    if (loading) return <LoadingScreen />
+
     return (
         <DashboardLayout>
             <div className="min-h-screen flex flex-col gap-8 pb-8">
@@ -51,20 +62,25 @@ export default function Reports() {
                                 initial={{ opacity: 0, x: -15 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="flex items-center justify-between p-4 bg-[#074b72] rounded-lg hover:bg-[#09577f] transition"
+                                className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:bg-[#09577f] transition-all duration-300"
                             >
+                                {/* User Info */}
                                 <div className="flex-1">
-                                    <p className="text-white font-medium">{activity.user}</p>
-                                    <p className="text-sm text-gray-300">{activity.action}</p>
+                                    <p className="text-gray-800 font-semibold hover:text-white">{activity.user}</p>
+                                    <p className="text-sm text-gray-500">{activity.action}</p>
                                 </div>
+
+                                {/* Amount & Time */}
                                 <div className="text-right">
                                     <p className="text-[#f7ad19] font-semibold">{activity.amount}</p>
                                     <p className="text-xs text-gray-400">{activity.time}</p>
                                 </div>
+
+                                {/* Status Badge */}
                                 <span
-                                    className={`ml-4 px-3 py-1 rounded-full text-xs font-semibold ${activity.status === 'Completed'
-                                        ? 'bg-green-500/20 text-green-400'
-                                        : 'bg-yellow-500/20 text-yellow-400'
+                                    className={`ml-4 px-3 py-1 rounded-full text-xs font-semibold ${activity.status === "Completed"
+                                        ? "bg-green-100 text-green-600"
+                                        : "bg-yellow-100 text-yellow-600"
                                         }`}
                                 >
                                     {activity.status}
@@ -72,6 +88,7 @@ export default function Reports() {
                             </motion.div>
                         ))}
                     </div>
+
                 </motion.section>
 
                 {/* Charts Section */}

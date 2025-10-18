@@ -15,8 +15,8 @@ const Sidebar = () => {
 
     return (
         <aside
-            className={`${collapsed ? "w-20" : "w-64"
-                }  fixed top-0 left-0  z-50 bg-[#053f5c] text-[#429ebd] h-screen flex flex-col transition-all duration-300`}
+            className={`${collapsed ? "w-15" : "w-64"
+                }  fixed top-0 left-0  z-50 bg-[#053f5c] text-[#429ebd] min-h-full flex flex-col transition-all duration-300`}
         >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-700">

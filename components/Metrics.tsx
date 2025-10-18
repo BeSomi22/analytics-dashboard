@@ -57,12 +57,7 @@ export default function Metrics() {
         return () => clearInterval(timer);
     }, [metrics]);
 
-    if (!animatedMetrics)
-        return (
-            <p className="text-gray-500 text-center animate-pulse">
-                Loading metrics...
-            </p>
-        );
+    if (!animatedMetrics) return null;
 
     const cardData = [
         { label: "Total Visitors", value: animatedMetrics.totalVisitors, icon: Users, color: "#429ebd" },
@@ -72,20 +67,6 @@ export default function Metrics() {
     ];
 
     return (
-        // <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        //     {cardData.map(({ label, value, icon: Icon, color }) => (
-        //         <div
-        //             key={label}
-        //             className="bg-white p-6 rounded-xl shadow flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300"
-        //         >
-        //             <Icon size={28} style={{ color }} className="mb-2" />
-        //             <p className="text-sm text-gray-500 mb-1">{label}</p>
-        //             <h2 className="text-2xl font-bold" style={{ color }}>
-        //                 {typeof value === "number" ? value.toLocaleString() : value}
-        //             </h2>
-        //         </div>
-        //     ))}
-        // </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {cardData.map(({ label, value, icon: Icon, color }) => (
                 <div

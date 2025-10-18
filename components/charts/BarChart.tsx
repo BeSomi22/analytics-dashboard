@@ -10,7 +10,6 @@ type SalesData = {
 
 export default function SalesBarChart() {
     const [sales, setSales] = useState<SalesData[]>([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchSales = async () => {
@@ -20,17 +19,13 @@ export default function SalesBarChart() {
                 setSales(result.sales);
             } catch (error) {
                 console.error("Error fetching sales data:", error);
-            } finally {
-                setLoading(false);
             }
         };
         fetchSales();
     }, []);
 
-    if (loading) return <p className="text-gray-500">Loading sales chart...</p>;
 
     return (
-        // <div className="bg-white p-4 rounded-xl shadow w-full">
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -45,7 +40,6 @@ export default function SalesBarChart() {
                     <YAxis />
                     <Tooltip />
                     <Bar dataKey="value"
-                        //  fill="rgba(37, 99, 235, 0.7)"
                         fill="#f7ad19"
                     />
                 </BarChart>

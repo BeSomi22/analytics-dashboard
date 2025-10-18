@@ -17,7 +17,6 @@ type VisitorData = {
 
 export default function VisitorsAreaChart() {
     const [data, setData] = useState<VisitorData[]>([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchVisitors = async () => {
@@ -27,17 +26,13 @@ export default function VisitorsAreaChart() {
                 setData(result.visitors);
             } catch (error) {
                 console.error("Error fetching API data:", error);
-            } finally {
-                setLoading(false);
             }
         };
         fetchVisitors();
     }, []);
 
-    if (loading)
-        return <p className="text-gray-500 text-center">Loading visitors chart...</p>;
-    if (!data.length)
-        return <div className="text-red-500 text-center">No data available</div>;
+    // if (!data.length)
+    //     return <div className="text-red-500 text-center">No data available</div>;
 
     return (
         <motion.div
